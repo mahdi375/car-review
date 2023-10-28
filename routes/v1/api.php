@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Car\CarController;
 use App\Http\Controllers\Api\V1\Review\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('private')->middleware('auth:sanctum')->name('private.')->group(function () {
+
     Route::prefix('cars')->name('cars.')->controller(CarController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
@@ -16,10 +18,18 @@ Route::prefix('private')->middleware('auth:sanctum')->name('private.')->group(fu
     Route::prefix('reviews')->name('reviews.')->controller(ReviewController::class)->group(function () {
         Route::post('/', 'store')->name('store');
     });
+
 });
 
 Route::prefix('public')->name('public.')->group(function () {
+
+    Route::prefix('auth')->name('auth.')->controller(AuthController::class)->group(function () {
+        Route::post('login', 'login')->name('login');
+        Route::post('register', 'register')->name('register');
+    });
+
     Route::prefix('reviews')->name('reviews.')->controller(ReviewController::class)->group(function () {
         Route::get('/', 'index')->name('index');
     });
+
 });
