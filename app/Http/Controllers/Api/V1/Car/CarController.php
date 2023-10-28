@@ -21,7 +21,7 @@ class CarController extends Controller
 
     public function show(Car $car): JsonResponse
     {
-        $car->load('brand');
+        $car->load(['brand', 'owner']);
 
         return $this->responseSuccess(CarResource::make($car));
     }
