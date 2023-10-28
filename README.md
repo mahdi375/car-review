@@ -27,3 +27,10 @@ docker exec -it devish-app-1 php artisan db:seed
 ```bash
 docker exec -it devish-app-1 php artisan test
 ```
+---
+
+### screenshots
+- tests result
+    ![](doc/Screenshot%20from%202023-10-28%2022-02-07.png)
+- postman collection
+    ![](doc/Screenshot%20from%202023-10-28%2021-59-57.png)
