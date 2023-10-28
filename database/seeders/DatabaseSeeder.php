@@ -3,20 +3,51 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Brand;
+use App\Models\Car;
+use App\Models\Review;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->seedBrands();
+        $this->seedCars();
+        $this->seedReviews();
+    }
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+    private function seedBrands(): void
+    {
+        $brands = ['Toyota', 'Ford', 'Volkswagen', 'Honda', 'Chevrolet', 'BMW', 'Mercedes-Benz'];
+
+        foreach ($brands as $name) {
+            Brand::create([
+                'name' => $name,
+            ]);
+        }
+    }
+
+    private function seedCars(): void
+    {
+        $brands = Brand::pluck('id');
+
+        $brands->each(function ($brand) {
+            Car::factory(rand(2, 6))->create([
+                'brand_id' => $brand,
+            ]);
+        });
+    }
+
+    private function seedReviews(): void
+    {
+        $cars = Car::pluck('id');
+
+        $cars->each(function ($car) {
+            Review::factory(rand(0, 6))->create([
+                'car_id' => $car,
+            ]);
+        });
     }
 }
