@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->seedBrands();
         $this->seedCars();
         $this->seedReviews();
+
+        $this->command->info('Seeding Successfully Completed.');
     }
 
     private function seedBrands(): void
