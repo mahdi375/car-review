@@ -13,7 +13,7 @@ class CarResource extends JsonResource
             'model' => $this->model,
             'color' => $this->color,
             'brand' => BrandResource::make($this->whenLoaded('brand')),
-            'user' => UserResource::make($this->whenLoaded('user')),
+            'owner' => UserResource::make($this->whenLoaded('owner')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
